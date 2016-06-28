@@ -17,12 +17,12 @@ unsigned char buffer_index=0;
 #define RESEIVE_OK 1
 volatile unsigned char flag = 0;
 
-//первые четыре байта - адрес и команда, пятый байт - количество повторов
+//ГЇГҐГ°ГўГ»ГҐ Г·ГҐГІГ»Г°ГҐ ГЎГ Г©ГІГ  - Г Г¤Г°ГҐГ± ГЁ ГЄГ®Г¬Г Г­Г¤Г , ГЇГїГІГ»Г© ГЎГ Г©ГІ - ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЇГ®ГўГІГ®Г°Г®Гў
 #define NUM_REPEAT 4
 #define MAX_SIZE 5
 unsigned char buf[MAX_SIZE] = {0x31, 0x32, 0x33, 0x34, 0x35,};
 
-//инициализация таймера Т1
+//ГЁГ­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГї ГІГ Г©Г¬ГҐГ°Г  Г’1
 void TIM_Init(void)
 {
    DDRL &= ~(1<<PL1);
@@ -53,7 +53,7 @@ if(buffer_index == MAX_SIZE)
 	}
 }
 
-//прерывание по событию захват******************************
+//ГЇГ°ГҐГ°Г»ГўГ Г­ГЁГҐ ГЇГ® Г±Г®ГЎГ»ГІГЁГѕ Г§Г ГµГўГ ГІ******************************
 ISR(TIMER5_CAPT_vect)
 {
 
@@ -92,7 +92,7 @@ void TIM_Handle(void)
   period = TIM_CalcPeriod();
   
   switch(currentState){
-      //ждем стартовый импульс
+      //Г¦Г¤ГҐГ¬ Г±ГІГ Г°ГІГ®ГўГ»Г© ГЁГ¬ГЇГіГ«ГјГ±
       case IDLE:
          if (period < START_IMP_MAX) {
            if (period > START_IMP_TH){
@@ -108,7 +108,7 @@ void TIM_Handle(void)
          }
          break;
        
-       //прием посылки
+       //ГЇГ°ГЁГҐГ¬ ГЇГ®Г±Г»Г«ГЄГЁ
        case RESEIVE:
          if (period < BIT_IMP_MAX){
            if (period > BIT_IMP_TH){
