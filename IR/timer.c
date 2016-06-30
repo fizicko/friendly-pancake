@@ -1,4 +1,3 @@
-#define F_CPU 16000000UL
 #define PRE 64UL
 
 #include "timer.h"
@@ -9,12 +8,16 @@ static unsigned char data;
 static unsigned char countBit, countByte;
 volatile unsigned int icr1 = 0;
 volatile unsigned int icr2 = 0;
+
 volatile unsigned char flag = 0;
 
 enum state {IDLE = 0, RESEIVE = 1};  
 enum state currentState = IDLE;
 
 unsigned char buf[MAX_SIZE];
+
+//***************************************
+
 
 //***************************************
 void TIM_Init(void)
@@ -32,36 +35,7 @@ void TIM_Init(void)
 }
 
 //***************************************
-void UART_Init(void)
-{
 
-//Init UART
-UBRR0L = LO(bauddivider);
-UBRR0H = 0x0F & HI(bauddivider);
-UCSR0A = 0;
-UCSR0B = 1<<RXEN0|1<<TXEN0|0<<RXCIE0|0<<TXCIE0;
-UCSR0C = 1<<UCSZ00|1<<UCSZ01;
-
-
-}
-
-//***************************************
-ISR (USART0_UDRE_vect)		
-{
-	buffer_index++;			
-if(buffer_index == MAX_SIZE)  	
-	{
-	UCSR0B &=~(1<<UDRIE0);
-	buffer_index = 0;	
-	ClearBit(flag, RESEIVE_OK);
-	}
-	else 
-	{
-	UDR0 = buf[buffer_index];	
-	}
-
-}
-//***************************************
 ISR(TIMER5_CAPT_vect)
 {
 
@@ -132,10 +106,5 @@ ISR(TIMER5_CAPT_vect)
 
 
 //***************************************
-void TIM_Display(void)
-{
-	if(BitIsSet(flag, RESEIVE_OK)){
-	UDR0 = buf[0];		
-	UCSR0B|=(1<<UDRIE0);	
-	}
-}
+
+
