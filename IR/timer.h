@@ -1,17 +1,3 @@
-//***************************************************************************
-//  File........: timer.h
-//
-//  Author(s)...: Pashgan    chipenable.ru
-//
-//  Target(s)...: ATMega...
-//
-//  Compiler....: GNU GCC
-//
-//  Description.: Ìîäóëü äëÿ ïðèåìêà ÈÊ ñèãíàëîâ. Ïðîòîêîë ôèðìû NEC  
-//
-//  Data........: 18.04.11  
-//
-//***************************************************************************
 #ifndef TIM_H
 #define TIM_H
 
@@ -33,6 +19,6 @@
 #define MAX_SIZE 5
 #define CAPTURE    0
 
-void TIM_Init(void);       //eieoeaeecaoey oaeia?a O1
+void TIM_Init(void);       // настройка таймера
 
-#endif //TIM_H#ifndef TIM_H
+#endif 
